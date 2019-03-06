@@ -5,6 +5,7 @@
         <div class="col-md-4">
           <div class="course-avatar">
             <img
+              class="img-responsive"
               src="https://learn.x3english.com/wp-content/uploads/2017/07/05-banner-492x305-3.jpg"
               alt
             >
