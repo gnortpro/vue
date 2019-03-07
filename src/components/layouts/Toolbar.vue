@@ -76,6 +76,10 @@
         <router-view/>
       </v-container>
     </v-content>
+    <v-footer app>
+      &copy;2018 —
+      <strong>X3English Ver 2.0</strong>
+    </v-footer>
     <v-btn fab bottom right color="pink" dark fixed @click="dialog = !dialog">
       <v-icon>add</v-icon>
     </v-btn>
@@ -132,33 +136,19 @@ export default {
     drawer: null,
     items: [
       { icon: "home", text: "Home" },
-      { icon: "history", text: "Frequently contacted" },
-      { icon: "content_copy", text: "Duplicates" },
+      { icon: "school", text: "Elite Zone" },
+      { icon: "people", text: "Coach Zone" },
       {
         icon: "keyboard_arrow_up",
         "icon-alt": "keyboard_arrow_down",
-        text: "Labels",
-        model: true,
-        children: [{ icon: "add", text: "Create label" }]
-      },
-      {
-        icon: "keyboard_arrow_up",
-        "icon-alt": "keyboard_arrow_down",
-        text: "More",
+        text: "Native 1 to 1",
         model: false,
-        children: [
-          { text: "Import" },
-          { text: "Export" },
-          { text: "Print" },
-          { text: "Undo changes" },
-          { text: "Other contacts" }
-        ]
+        children: [{ text: "Native Zone", icon: "history" }]
       },
-      { icon: "settings", text: "Settings" },
-      { icon: "chat_bubble", text: "Send feedback" },
-      { icon: "help", text: "Help" },
-      { icon: "phonelink", text: "App downloads" },
-      { icon: "keyboard", text: "Go to the old version" }
+      { icon: "book", text: "Courses" },
+      { icon: "help", text: "Quizzes" },
+      { icon: "photo", text: "FlashCards" },
+      { icon: "settings", text: "Support" }
     ]
   }),
   props: {

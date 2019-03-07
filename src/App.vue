@@ -1,15 +1,27 @@
 <template>
-  <div id="app">
-    <Toolbar/>
-  </div>
+  <v-app>
+    <component v-bind:is="layout"></component>
+  </v-app>
 </template>
 
-<style>
-#app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-</style>
+<script>
+import AppLayout from "./layouts/AppLayout";
+import LoginLayout from "./layouts/LoginLayout";
+export default {
+  computed: {
+    layout() {
+      return this.$store.getters.layout;
+    }
+  },
+  components: {
+    "app-layout": AppLayout,
+    "login-layout": LoginLayout
+    // define as many layouts you want for the application
+  },
+  updated() {
+    if (!localStorage.token && this.$route.path !== "/") {
+      this.$router.push("/?redirect=" + this.$route.path);
+    }
+  }
+};
+</script>
