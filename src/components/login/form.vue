@@ -41,6 +41,7 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
   name: "Login",
   data() {
@@ -60,17 +61,23 @@ export default {
       }
     };
   },
+  computed: {
+    ...mapGetters({ currentUser: "currentUser" })
+  },
   updated() {
     if (localStorage.token) {
-      this.$router.replace(this.$route.query.redirect || "/authors");
+      this.checkCurrentLogin();
     }
   },
+  created() {
+    this.checkCurrentLogin();
+  },
+  mounted() {},
   methods: {
-    login() {
-      this.$http
-        .post("/auth", { user: this.email, password: this.password })
-        .then(request => this.loginSuccessful(request))
-        .catch(() => this.loginFailed());
+    checkCurrentLogin() {
+      if (this.currentUser) {
+        this.$router.replace(this.$route.query.redirect || "/home");
+      }
     },
     loginSuccessful(req) {
       if (!req.data.token) {
@@ -80,15 +87,37 @@ export default {
 
       localStorage.token = req.data.token;
       this.error = false;
-
-      this.$router.replace(this.$route.query.redirect || "/authors");
+      this.$store.dispatch("login");
+      this.$router.replace(this.$route.query.redirect || "/home");
     },
 
     loginFailed() {
       this.error = "Login failed!";
+      this.$store.dispatch("logout");
       delete localStorage.token;
+      this.$router.replace(this.$route.query.redirect || "/login");
+    },
+    login() {
+      this.$http
+        .post("/login", { email: this.email, password: this.password })
+        .then(request => this.loginSuccessful(request))
+        .catch(() => this.loginFailed());
     }
   }
+
+  // created() {
+  //   axios
+  //     .post("https://reqres.in/api/login", {
+  //       email: this.data.email,
+  //       password: this.data.password
+  //     })
+  //     .then(function(res) {
+  //       console.log(res);
+  //     })
+  //     .catch(function(error) {
+  //       console.log(error);
+  //     });
+  // }
 };
 </script>
 

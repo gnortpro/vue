@@ -1,5 +1,6 @@
 import Vue from "vue";
 import Router from "vue-router";
+import Logout from "@/components/logout";
 
 Vue.use(Router);
 
@@ -38,6 +39,12 @@ export default new Router({
       component: function() {
         return import(/* webpackChunkName: "about" */ "../views/login/main.vue");
       }
+    },
+
+    {
+      path: "/logout",
+      name: "Logout",
+      component: Logout
     },
 
     {

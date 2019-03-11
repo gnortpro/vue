@@ -1,26 +1,33 @@
 <template>
   <v-app>
-    <component v-bind:is="layout"></component>
+    <template v-if="currentUser">
+      <Toolbar/>
+    </template>
+
+    <template v-if="!currentUser">
+      <LoginForm/>
+    </template>
   </v-app>
 </template>
 
 <script>
-import AppLayout from "./layouts/AppLayout";
-import LoginLayout from "./layouts/LoginLayout";
+import { mapGetters } from "vuex";
 export default {
   computed: {
-    layout() {
-      return this.$store.getters.layout;
-    }
+    ...mapGetters({ currentUser: "currentUser" })
   },
-  components: {
-    "app-layout": AppLayout,
-    "login-layout": LoginLayout
-    // define as many layouts you want for the application
+
+  created() {
+    this.checkCurrentLogin();
   },
   updated() {
-    if (!localStorage.token && this.$route.path !== "/") {
-      this.$router.push("/?redirect=" + this.$route.path);
+    this.checkCurrentLogin();
+  },
+  methods: {
+    checkCurrentLogin() {
+      if (!this.currentUser && this.$route.path !== "/") {
+        this.$router.push("/?redirect=" + this.$route.path);
+      }
     }
   }
 };

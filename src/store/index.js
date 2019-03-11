@@ -1,54 +1,36 @@
-/**
- * Vuex
- *
- * @library
- *
- * https://vuex.vuejs.org/en/
- */
-
-// Lib imports
 import Vue from "vue";
 import Vuex from "vuex";
+import axios from "axios";
+import VueAxios from "vue-axios";
+import auth from "./auth";
+Vue.use(Vuex, axios, VueAxios);
 
-// Store functionality
-import actions from "./actions";
-import getters from "./getters";
-import modules from "./modules";
-import mutations from "./mutations";
-import state from "./state";
+export default new Vuex.Store({
+  state: {
+    coins: [],
+    token: []
+  },
 
-Vue.use(Vuex);
-
-// Create a new store
-const store = new Vuex.Store({
-  actions,
-  getters,
-  modules,
-  mutations,
-  state
+  mutations: {
+    SET_COINS(state, coins) {
+      state.coins = coins;
+    },
+    SET_LOGIN(state, token) {
+      state.token = token;
+    }
+  },
+  actions: {
+    // eslint-disable-next-line no-unused-vars
+    loadCoins({ commit }) {
+      axios
+        .get("http://localhost:4000/results")
+        .then(r => r.data)
+        .then(coins => {
+          commit("SET_COINS", coins);
+        });
+    }
+  },
+  modules: {
+    auth
+  }
 });
-
-export default store;
-
-// "use strict";
-
-// import Vue from "vue";
-// import Vuex from "vuex";
-
-// Vue.use(Vuex);
-
-// export const store = new Vuex.Store({
-//   state: {
-//     layout: "login-layout"
-//   },
-//   mutations: {
-//     SET_LAYOUT(state, payload) {
-//       state.layout = payload;
-//     }
-//   },
-//   getters: {
-//     layout(state) {
-//       return state.layout;
-//     }
-//   }
-// });
