@@ -61,42 +61,8 @@ export default {
       }
     };
   },
-  computed: {
-    ...mapGetters({ currentUser: "currentUser" })
-  },
-  updated() {
-    if (localStorage.token) {
-      this.checkCurrentLogin();
-    }
-  },
-  created() {
-    this.checkCurrentLogin();
-  },
   mounted() {},
   methods: {
-    checkCurrentLogin() {
-      if (this.currentUser) {
-        this.$router.replace(this.$route.query.redirect || "/home");
-      }
-    },
-    loginSuccessful(req) {
-      if (!req.data.token) {
-        this.loginFailed();
-        return;
-      }
-
-      localStorage.token = req.data.token;
-      this.error = false;
-      this.$store.dispatch("login");
-      this.$router.replace(this.$route.query.redirect || "/home");
-    },
-
-    loginFailed() {
-      this.error = "Login failed!";
-      this.$store.dispatch("logout");
-      delete localStorage.token;
-      this.$router.replace(this.$route.query.redirect || "/login");
-    },
     login() {
       this.$http
         .post("/login", { email: this.email, password: this.password })

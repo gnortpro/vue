@@ -2,7 +2,6 @@ import Vue from "vue";
 import Vuex from "vuex";
 import axios from "axios";
 import VueAxios from "vue-axios";
-import auth from "./auth";
 Vue.use(Vuex, axios, VueAxios);
 
 export default new Vuex.Store({
@@ -31,6 +30,6 @@ export default new Vuex.Store({
     }
   },
   modules: {
-    auth
+   
   }
 });
