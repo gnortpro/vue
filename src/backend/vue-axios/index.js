@@ -1,8 +1,8 @@
 /* global localStorage */
 
-import axios from "axios";
+import axios from "axios"
 
-const API_URL = process.env.API_URL || "https://reqres.in/api";
+const API_URL = process.env.API_URL || "https://reqres.in/api"
 
 export default axios.create({
   baseURL: API_URL,
@@ -10,4 +10,4 @@ export default axios.create({
     "Content-Type": "application/json",
     Authorization: "Bearer " + localStorage.token
   }
-});
+})

@@ -1,35 +1,37 @@
-import Vue from "vue";
-import Vuex from "vuex";
-import axios from "axios";
-import VueAxios from "vue-axios";
-Vue.use(Vuex, axios, VueAxios);
+import Vue from "vue"
+import Vuex from "vuex"
+import axios from "axios"
+import VueAxios from "vue-axios"
+import SourceService from "@/services/SourceService.js"
+Vue.use(Vuex, axios, VueAxios)
 
 export default new Vuex.Store({
   state: {
-    coins: [],
-    token: []
+    course: [],
+    layout: "app-layout"
   },
-
   mutations: {
-    SET_COINS(state, coins) {
-      state.coins = coins;
+    SET_COURSE(state, course) {
+      state.course = course
     },
-    SET_LOGIN(state, token) {
-      state.token = token;
+    SET_LAYOUT(state, payload) {
+      state.layout = payload
     }
   },
   actions: {
-    // eslint-disable-next-line no-unused-vars
-    loadCoins({ commit }) {
-      axios
-        .get("http://localhost:4000/results")
-        .then(r => r.data)
-        .then(coins => {
-          commit("SET_COINS", coins);
-        });
+    fetchCource({ commit }) {
+      SourceService.getCource()
+        .then(response => {
+          commit("SET_COURSE", response.data.data)
+        })
+        .catch(error => {
+          console.log("There was an error:", error.response)
+        })
     }
   },
-  modules: {
-   
+  getters: {
+    layout(state) {
+      return state.layout
+    }
   }
-});
+})

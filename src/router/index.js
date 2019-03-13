@@ -1,8 +1,9 @@
-import Vue from "vue";
-import Router from "vue-router";
-import Logout from "@/components/logout";
+import Vue from "vue"
+import Router from "vue-router"
+import Logout from "@/components/logout"
+import Login from "@/components/login/form.vue"
 
-Vue.use(Router);
+Vue.use(Router)
 
 export default new Router({
   mode: "history",
@@ -14,7 +15,7 @@ export default new Router({
       // this generates a separate chunk (about.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
       component: function() {
-        return import(/* webpackChunkName: "about" */ "../views/course/main.vue");
+        return import(/* webpackChunkName: "about" */ "../views/course/main.vue")
       }
     },
 
@@ -25,20 +26,18 @@ export default new Router({
       // this generates a separate chunk (about.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
       component: function() {
-        return import(/* webpackChunkName: "about" */ "../views/course/single.vue");
+        return import(/* webpackChunkName: "about" */ "../views/course/single.vue")
       },
       props: true
     },
 
     {
-      path: "/login",
+      path: "/",
       name: "login",
       // route level code-splitting
       // this generates a separate chunk (about.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: function() {
-        return import(/* webpackChunkName: "about" */ "../views/login/main.vue");
-      }
+      component: Login
     },
 
     {
@@ -54,8 +53,8 @@ export default new Router({
       // this generates a separate chunk (about.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
       component: function() {
-        return import(/* webpackChunkName: "about" */ "../views/test/Test.vue");
+        return import(/* webpackChunkName: "about" */ "../views/test/Test.vue")
       }
     }
   ]
-});
+})

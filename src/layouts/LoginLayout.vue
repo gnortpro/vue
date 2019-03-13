@@ -1,11 +1,9 @@
 <template>
-  <div>
-    <LoginForm/>
-  </div>
+  <LoginForm/>
 </template>
 
 <script>
-export default {};
+export default {}
 </script>
 
 <style>
