@@ -1,5 +1,6 @@
 <template>
   <v-app>
+    <CheckToken/>
     <component v-bind:is="layout"></component>
   </v-app>
 </template>

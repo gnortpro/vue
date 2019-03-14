@@ -62,12 +62,12 @@ export default {
     }
   },
   mounted() {},
-  created() {
-    this.checkCurrentLogin()
-  },
-  updated() {
-    this.checkCurrentLogin()
-  },
+  // created() {
+  //   this.checkCurrentLogin()
+  // },
+  // updated() {
+  //   this.checkCurrentLogin()
+  // },
   methods: {
     checkCurrentLogin() {
       if (localStorage.token) {

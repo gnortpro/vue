@@ -9,4 +9,15 @@ const apiClient = axios.create({
   }
 })
 
-export default {}
+export default {
+  getCource() {
+    return apiClient.get("/unknown")
+  },
+  getCourceDetails(id) {
+    return apiClient.get("/unknown", {
+      params: {
+        id: id
+      }
+    })
+  }
+}

@@ -9,4 +9,8 @@ const apiClient = axios.create({
   }
 })
 
-export default {}
+export default {
+  checkLogin() {
+    return apiClient.get("/unknown")
+  }
+}

@@ -9,4 +9,15 @@ const apiClient = axios.create({
   }
 })
 
-export default {}
+export default {
+  getUserList() {
+    return apiClient.get("/unknown")
+  },
+  getUserDetail(id) {
+    return apiClient.get("/unknown", {
+      params: {
+        id: id
+      }
+    })
+  }
+}
