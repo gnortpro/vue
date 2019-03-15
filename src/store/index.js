@@ -11,14 +11,19 @@ Vue.use(Vuex, axios, VueAxios)
 export default new Vuex.Store({
   state: {
     course: [],
+    courseDetails: {},
     layout: "app-layout",
     hasToken: 0,
     user: [],
-    userDetail: []
+    userDetail: [],
+    token: {}
   },
   mutations: {
     SET_COURSE(state, course) {
       state.course = course
+    },
+    SET_COURSE_DETAIL(state, payload) {
+      state.courseDetails = payload
     },
     SET_LAYOUT(state, payload) {
       state.layout = payload
@@ -31,17 +36,34 @@ export default new Vuex.Store({
     },
     SET_USER_DETAIL(state, payload) {
       state.userDetail = payload
+    },
+    SET_LOGIN(state, token) {
+      state.token = token
     }
   },
   actions: {
     fetchCource({ commit }) {
       CourseService.getCource()
         .then(response => {
-          commit("SET_COURSE", response.data.data)
+          commit("SET_COURSE", response.data)
         })
         .catch(error => {
           console.log("There was an error:", error.response)
         })
+    },
+    fetchCourseDetails({ commit, getters }, id) {
+      var singleCourse = getters.getCourseById(id)
+      if (singleCourse) {
+        commit("SET_COURSE_DETAIL", singleCourse)
+      } else {
+        CourseService.getCourceDetails(id)
+          .then(response => {
+            commit("SET_COURSE_DETAIL", response.data)
+          })
+          .catch(error => {
+            console.log(error.response)
+          })
+      }
     },
     checkToken({ commit }) {
       LoginService.checkLogin()
@@ -77,6 +99,9 @@ export default new Vuex.Store({
     },
     checkLogin(state) {
       return state.hasToken
+    },
+    getCourseById: state => id => {
+      return state.course.find(courseDetails => courseDetails.id === id)
     }
   }
 })

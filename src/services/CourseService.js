@@ -1,7 +1,7 @@
 import axios from "axios"
 
 const apiClient = axios.create({
-  baseURL: `https://reqres.in/api`,
+  baseURL: `http://localhost:3000`,
   withCredentials: false, // This is the default
   headers: {
     Accept: "application/json",
@@ -11,13 +11,9 @@ const apiClient = axios.create({
 
 export default {
   getCource() {
-    return apiClient.get("/unknown")
+    return apiClient.get("/courses")
   },
   getCourceDetails(id) {
-    return apiClient.get("/unknown", {
-      params: {
-        id: id
-      }
-    })
+    return apiClient.get("/courses/" + id)
   }
 }

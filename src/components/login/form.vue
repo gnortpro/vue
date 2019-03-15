@@ -69,36 +69,40 @@ export default {
   //   this.checkCurrentLogin()
   // },
   methods: {
-    checkCurrentLogin() {
-      if (localStorage.token) {
-        this.$router.replace(this.$route.query.redirect || "/course")
-      }
-    }
+    // checkCurrentLogin() {
+    //   if (localStorage.token) {
+    //     this.$router.replace(this.$route.query.redirect || "/course")
+    //   }
+    // }
     // ...
   },
   methods: {
     login() {
-      this.$http
-        .post("/login", { email: this.email, password: this.password })
-        .then(request => this.loginSuccessful(request))
-        .catch(() => this.loginFailed())
-    },
-    loginSuccessful(req) {
-      if (!req.data.token) {
-        this.loginFailed()
-        return
-      }
-
-      localStorage.token = req.data.token
-      this.error = false
-
-      this.$router.replace(this.$route.query.redirect || "/course")
-    },
-
-    loginFailed() {
-      this.error = "Login failed!"
-      delete localStorage.token
+      // this.$http
+      //   .post("/login", { email: this.email, password: this.password })
+      //   .then(request => this.loginSuccessful(request))
+      //   .catch(() => this.loginFailed())
+      this.$state.dispatch("login", {
+        email: this.email,
+        password: this.password
+      })
     }
+    // loginSuccessful(req) {
+    //   if (!req.data.token) {
+    //     this.loginFailed()
+    //     return
+    //   }
+
+    //   localStorage.token = req.data.token
+    //   this.error = false
+
+    //   this.$router.replace(this.$route.query.redirect || "/course")
+    // },
+
+    // loginFailed() {
+    //   this.error = "Login failed!"
+    //   delete localStorage.token
+    // }
   }
 
   // created() {

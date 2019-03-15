@@ -10,6 +10,11 @@ const apiClient = axios.create({
 })
 
 export default {
+  postLogin(user) {
+    return apiClient.post("/login", {
+      body: user
+    })
+  },
   getUserList() {
     return apiClient.get("/unknown")
   },

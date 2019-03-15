@@ -1,21 +1,20 @@
 <template>
   <div>
     <CourseHeader>
-      <h1 slot="course-title">{{title}}</h1>
-      <p slot="course-excerpt">{{excerpt}}</p>
+      <h1 slot="course-title">{{ courseDetails.title }}</h1>
+      <p slot="course-excerpt">{{courseDetails.description}}</p>
     </CourseHeader>
   </div>
 </template>
 
 <script>
+import { mapState } from "vuex"
 export default {
-  data() {
-    return {
-      title: "Eng Breaking",
-      excerpt:
-        "Phá băng tiếng Anh, thành thạo giao tiếp cơ bản với người bản xứ chỉ sau 144 giờ luyện tập, dựa trên 3 kỹ thuật nền tảng."
-    }
-  }
+  props: ["id"],
+  created() {
+    this.$store.dispatch("fetchCourseDetails", this.id)
+  },
+  computed: mapState(["courseDetails"])
 }
 </script>
 
