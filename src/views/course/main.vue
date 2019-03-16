@@ -3,13 +3,13 @@
     <div class="container" style="max-width: 1280px">
       <div class="row">
         <div class="col-md-8">
-          <h2 class="text-left">In Progress</h2>
+          <h1 class="text-left" style="font-weight: 600;">In Progress</h1>
           <div class="row">
             <CourseCard v-for=" c in course" :key="c.id" :courseDetail="c"/>
           </div>
         </div>
         <div class="col-md-4">
-          <h2>Recommended Course</h2>
+          <h1 style="font-weight: 600;">Recommended Course</h1>
           <v-card class="recommended-course" style="margin-bottom: 20px">
             <v-card-title primary-title>
               <div class="text-center">

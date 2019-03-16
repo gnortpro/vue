@@ -14,7 +14,9 @@
     "vue-axios": "^2.1.4",
     "vue-router": "^3.0.1",
     "vuetify": "^1.5.5",
-    "vuex": "^3.1.0"
+    "vuex": "^3.1.0",
+    "stylus-loader": "^3.0.2",
+    "stylus": "0.52.4"
   },
   "devDependencies": {
     "@vue/cli-plugin-eslint": "^3.4.0",

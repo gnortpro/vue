@@ -12,7 +12,7 @@
           </div>
           <div class="col-md-4">
             <p class="course-progress text-center">10 / 11 lessons completed</p>
-            <v-card-actions class>
+            <v-card-actions class="justify-center">
               <v-btn round large color="success">Resume</v-btn>
             </v-card-actions>
           </div>
