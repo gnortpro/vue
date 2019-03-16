@@ -10,6 +10,51 @@
         </div>
         <div class="col-md-4">
           <h2>Recommended Course</h2>
+          <v-card class="recommended-course" style="margin-bottom: 20px">
+            <v-card-title primary-title>
+              <div class="text-center">
+                <v-img
+                  class="course-thumbnail"
+                  src="https://learn.x3english.com/wp-content/uploads/2017/07/05-banner-492x305-3.jpg"
+                ></v-img>
+                <div class="course-title">Eng Breaking</div>
+                <span
+                  class="course-excerpt"
+                >Listen to your favorite artists and albums whenever and wherever, online and offline.</span>
+                <p>13 lessons</p>
+              </div>
+            </v-card-title>
+
+            <v-card-actions class="justify-center">
+              <v-btn round large color="success">Play</v-btn>
+            </v-card-actions>
+          </v-card>
+
+          <v-card class="recommended-course" style="margin-bottom: 20px">
+            <v-card-title primary-title>
+              <div class="text-center">
+                <v-img
+                  class="course-thumbnail"
+                  src="https://learn.x3english.com/wp-content/uploads/2017/07/05-banner-492x305-3.jpg"
+                ></v-img>
+                <div class="course-title">Eng Breaking</div>
+                <span
+                  class="course-excerpt"
+                >Listen to your favorite artists and albums whenever and wherever, online and offline.</span>
+                <p>13 lessons</p>
+              </div>
+            </v-card-title>
+
+            <v-card-actions class="justify-center">
+              <v-btn round large color="success">Play</v-btn>
+            </v-card-actions>
+          </v-card>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+          </v-card>
         </div>
       </div>
     </div>
@@ -29,4 +74,9 @@ export default {
   computed: mapState(["course"])
 }
 </script>
+<style>
+.recommended-course {
+  border-radius: 16px;
+}
+</style>
 
