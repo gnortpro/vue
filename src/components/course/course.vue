@@ -1,14 +1,14 @@
 <template>
   <div class="col-md-12">
-    <router-link :to="{ name: 'single-course', params: { id: courseDetail.id } }">
+    <router-link :to="{ name: 'single-course', params: { ID: courseDetail.ID } }">
       <v-card class="card-course">
         <div class="row">
           <div class="col-md-2">
             <v-img class="course-thumbnail" :src="courseDetail.thumbnail"></v-img>
           </div>
           <div class="col-md-6">
-            <div class="course-title justify-left">{{ courseDetail.title }}</div>
-            <p class="course-excerpt">{{ courseDetail.description }}</p>
+            <div class="course-title justify-left">{{ courseDetail.post_title }}</div>
+            <p class="course-excerpt">{{ courseDetail.post_excerpt }}</p>
           </div>
           <div class="col-md-4">
             <p class="course-progress text-center">10 / 11 lessons completed</p>

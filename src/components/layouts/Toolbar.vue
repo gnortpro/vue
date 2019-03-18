@@ -1,6 +1,13 @@
 <template>
   <v-app id="insprie">
-    <v-navigation-drawer v-model="drawer" :clipped="$vuetify.breakpoint.lgAndUp" fixed floating app>
+    <v-navigation-drawer
+      color="primary"
+      v-model="drawer"
+      :clipped="$vuetify.breakpoint.lgAndUp"
+      fixed
+      floating
+      app
+    >
       <v-list dense>
         <template v-for="item in items">
           <v-layout v-if="item.heading" :key="item.heading" row align-center>

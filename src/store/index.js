@@ -101,7 +101,7 @@ export default new Vuex.Store({
       return state.hasToken
     },
     getCourseById: state => id => {
-      return state.course.find(courseDetails => courseDetails.id === id)
+      return state.course.find(courseDetails => courseDetails.ID === id)
     }
   }
 })
