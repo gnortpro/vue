@@ -36,9 +36,9 @@
       </v-layout>
     </v-container>
     <div class="course_single_body">
-      <v-layout row>
-        <v-flex xs9>
-          <v-container grid-list-md style="background: white; padding: 10px 50px;">
+      <div class="row">
+        <div class="col-md-9" style="padding-right: 0;padding-left: 0;">
+          <div class="container" style="background: white; padding: 10px 50px;">
             <div class="clearfix">
               <div
                 class="float-left"
@@ -48,102 +48,84 @@
                 <v-btn round color="primary">In Progress</v-btn>
               </div>
             </div>
-          </v-container>
-          <v-container grid-list-md style="padding: 30px 50px;">
-            <div class="course_single_body_details" v-html="courseDetails.post_content"></div>
-            <v-container grid-list-md>
-              <div class="expansion_heading">
-                <div class="clearfix">
-                  <div class="float-left">Lessions</div>
-                  <div class="float-right">
-                    <v-btn outline @click="all" color="primary" dark style="border:none">Expand All</v-btn>|
-                    <v-btn
-                      outline
-                      @click="none"
-                      color="succprimaryess"
-                      style="border:none"
-                    >Collapse All</v-btn>
-                  </div>
-                </div>
-              </div>
-              <v-expansion-panel dark v-model="panel" expand>
-                <v-expansion-panel-content v-for="(item,i) in items" :key="i">
-                  <template v-slot:header>
-                    <div>Item</div>
-                  </template>
-                  <v-card>
-                    <v-card-text>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</v-card-text>
-                  </v-card>
-                </v-expansion-panel-content>
-              </v-expansion-panel>
-            </v-container>
-          </v-container>
-        </v-flex>
-        <v-flex xs3>
-          <v-container grid-list-md style="background: #D9D9D9">
+          </div>
+          <div class="container">
+            <div
+              class="course_single_body_details"
+              style="padding: 15px 20px 50px 25px;"
+              v-html="courseDetails.post_content"
+            ></div>
+
+            <LessonExpansion/>
+          </div>
+        </div>
+        <div class="col-md-3" style="padding-right: 0;padding-left: 0;">
+          <div class="container" style="background: #D9D9D9; text-align: center">
             <h3>TIẾNG ANH TRÔI CHẢY HƠN</h3>
-            <v-layout align-center column>
-              <v-card flat style="margin-bottom: 20px">
-                <v-img src="https://cdn.vuetifyjs.com/images/cards/desert.jpg" aspect-ratio="2.75"></v-img>
+            <div class="row">
+              <div class="recommended_course">
+                <v-card flat style="margin-bottom: 20px">
+                  <v-img
+                    src="https://cdn.vuetifyjs.com/images/cards/desert.jpg"
+                    aspect-ratio="2.75"
+                  ></v-img>
 
-                <v-card-title primary-title>
-                  <div>
-                    <h3 class="headline mb-0">Kangaroo Valley Safari</h3>
-                  </div>
-                </v-card-title>
-              </v-card>
+                  <v-card-title primary-title>
+                    <div>
+                      <h3 class="headline mb-0">Kangaroo Valley Safari</h3>
+                    </div>
+                  </v-card-title>
+                </v-card>
 
-              <v-card flat style="margin-bottom: 20px">
-                <v-img src="https://cdn.vuetifyjs.com/images/cards/desert.jpg" aspect-ratio="2.75"></v-img>
+                <v-card flat style="margin-bottom: 20px">
+                  <v-img
+                    src="https://cdn.vuetifyjs.com/images/cards/desert.jpg"
+                    aspect-ratio="2.75"
+                  ></v-img>
 
-                <v-card-title primary-title>
-                  <div>
-                    <h3 class="headline mb-0">Kangaroo Valley Safari</h3>
-                  </div>
-                </v-card-title>
-              </v-card>
-              <v-card flat style="margin-bottom: 20px">
-                <v-img src="https://cdn.vuetifyjs.com/images/cards/desert.jpg" aspect-ratio="2.75"></v-img>
+                  <v-card-title primary-title>
+                    <div>
+                      <h3 class="headline mb-0">Kangaroo Valley Safari</h3>
+                    </div>
+                  </v-card-title>
+                </v-card>
+                <v-card flat style="margin-bottom: 20px">
+                  <v-img
+                    src="https://cdn.vuetifyjs.com/images/cards/desert.jpg"
+                    aspect-ratio="2.75"
+                  ></v-img>
 
-                <v-card-title primary-title>
-                  <div>
-                    <h3 class="headline mb-0">Kangaroo Valley Safari</h3>
-                  </div>
-                </v-card-title>
-              </v-card>
-            </v-layout>
-          </v-container>
-        </v-flex>
-      </v-layout>
+                  <v-card-title primary-title>
+                    <div>
+                      <h3 class="headline mb-0">Kangaroo Valley Safari</h3>
+                    </div>
+                  </v-card-title>
+                </v-card>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import LessonExpansion from "@/components/course/list_lesson.vue"
 import { mapState } from "vuex"
 export default {
   data() {
     return {
-      panel: [],
-      items: 5,
       interval: {},
       value: 0
     }
   },
+  components: {
+    LessonExpansion
+  },
   props: ["ID"],
   created() {
     this.$store.dispatch("fetchCourseDetails", this.ID)
-  },
-  methods: {
-    // Create an array the length of our items
-    // with all values as true
-    all() {
-      this.panel = [...Array(this.items).keys()].map(_ => true)
-    },
-    // Reset the panel
-    none() {
-      this.panel = []
-    }
   },
   beforeDestroy() {
     clearInterval(this.interval)

@@ -5,7 +5,7 @@
         <div class="col-md-8">
           <h1 class="text-left" style="font-weight: 600;">In Progress</h1>
           <div class="row">
-            <CourseCard v-for=" c in course" :key="c.id" :courseDetail="c"/>
+            <CourseCard v-for=" c in course" :key="c.ID" :courseDetail="c"/>
           </div>
         </div>
         <div class="col-md-4">
@@ -48,12 +48,6 @@
             <v-card-actions class="justify-center">
               <v-btn round large color="success">Play</v-btn>
             </v-card-actions>
-          </v-card>
-        </div>
-      </div>
-    </div>
-  </div>
-</template>
           </v-card>
         </div>
       </div>

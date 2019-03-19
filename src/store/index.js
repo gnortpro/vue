@@ -5,6 +5,7 @@ import VueAxios from "vue-axios"
 import CourseService from "@/services/CourseService.js"
 import LoginService from "@/services/LoginService.js"
 import UserService from "@/services/UserService"
+import LessonService from "@/services/LessonService"
 
 Vue.use(Vuex, axios, VueAxios)
 
@@ -16,7 +17,8 @@ export default new Vuex.Store({
     hasToken: 0,
     user: [],
     userDetail: [],
-    token: {}
+    token: {},
+    lessons: []
   },
   mutations: {
     SET_COURSE(state, course) {
@@ -39,6 +41,9 @@ export default new Vuex.Store({
     },
     SET_LOGIN(state, token) {
       state.token = token
+    },
+    SET_LESSONS(state, payload) {
+      state.lessons = payload
     }
   },
   actions: {
@@ -64,6 +69,15 @@ export default new Vuex.Store({
             console.log(error.response)
           })
       }
+    },
+    fetchLessons({ commit }) {
+      LessonService.getListLessonOfCourse()
+        .then(response => {
+          commit("SET_LESSONS", response.data)
+        })
+        .catch(error => {
+          console.log(error.response)
+        })
     },
     checkToken({ commit }) {
       LoginService.checkLogin()
@@ -102,6 +116,9 @@ export default new Vuex.Store({
     },
     getCourseById: state => id => {
       return state.course.find(courseDetails => courseDetails.ID === id)
+    },
+    number_lesson_of_course(state) {
+      return state.lessons.length
     }
   }
 })

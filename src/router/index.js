@@ -20,7 +20,7 @@ export default new Router({
     },
 
     {
-      path: "/course/:id",
+      path: "/course/:ID",
       name: "single-course",
       // route level code-splitting
       // this generates a separate chunk (about.[hash].js) for this route
