@@ -57,10 +57,9 @@
 
 <script>
 import { mapState } from "vuex"
-import CourseCard from "@/components/course/course.vue"
 export default {
   components: {
-    CourseCard
+    CourseCard: () => import("@/components/course/course.vue")
   },
   created() {
     this.$store.dispatch("fetchCource")

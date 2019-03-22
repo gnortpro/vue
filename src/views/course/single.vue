@@ -43,7 +43,7 @@
               <div
                 class="float-left"
                 style="font-size: 25px;font-weight: 600;color: #ff3333;"
-              >{{courseDetails.lesson}} lessons</div>
+              >{{number_lesson_of_course}} lessons</div>
               <div class="float-right">
                 <v-btn round color="primary">In Progress</v-btn>
               </div>
@@ -111,8 +111,7 @@
 </template>
 
 <script>
-import LessonExpansion from "@/components/course/list_lesson.vue"
-import { mapState } from "vuex"
+import { mapState, mapGetters } from "vuex"
 export default {
   data() {
     return {
@@ -121,11 +120,12 @@ export default {
     }
   },
   components: {
-    LessonExpansion
+    LessonExpansion: () => import("@/components/course/list_lesson.vue")
   },
   props: ["ID"],
   created() {
     this.$store.dispatch("fetchCourseDetails", this.ID)
+    //console.log(this.ID)
   },
   beforeDestroy() {
     clearInterval(this.interval)
@@ -138,7 +138,10 @@ export default {
       this.value += 10
     }, 1000)
   },
-  computed: mapState(["courseDetails"])
+  computed: {
+    ...mapState(["courseDetails"]),
+    ...mapGetters(["number_lesson_of_course"])
+  }
 }
 </script>
 
@@ -149,13 +152,5 @@ export default {
 .course-avatar img {
   width: 150px;
   height: 100px;
-}
-.expansion_heading {
-  background: white;
-  padding: 5px 19px 3px 22px;
-}
-.expansion_heading .float-left {
-  font-size: 25px;
-  font-weight: 600;
 }
 </style>

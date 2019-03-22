@@ -10,10 +10,10 @@ const apiClient = axios.create({
 })
 
 export default {
-  getCource() {
-    return apiClient.get("/courses")
+  getTopic() {
+    return apiClient.get("/topics")
   },
-  getCourceDetails(id) {
-    return apiClient.get("/courses/" + id)
+  getTopicDetails(id) {
+    return apiClient.get("/topics/" + id)
   }
 }
