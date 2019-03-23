@@ -30,15 +30,21 @@ export default {
       panel: []
     }
   },
-  created() {
-    this.$store.dispatch("fetchTopics")
-  },
+
   props: {
-    listlesson: Object
+    listlesson: Object,
+    ID: {
+      type: String,
+      default: "1"
+    }
   },
   computed: {
     ...mapState(["topics"]),
     ...mapGetters(["number_topic_of_lesson"])
+  },
+  created() {
+    this.$store.dispatch("fetchTopics", this.ID)
+    console.log(this.ID)
   },
   methods: {
     all() {

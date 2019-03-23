@@ -3,14 +3,14 @@
     <router-link :to="{ name: 'single-course', params: { ID: courseDetail.ID } }">
       <v-card class="card-course">
         <div class="row">
-          <div class="col-md-2">
+          <div class="col-md-3 justify-center">
             <v-img class="course-thumbnail" :src="courseDetail.thumbnail"></v-img>
           </div>
           <div class="col-md-6">
             <div class="course-title justify-left">{{ courseDetail.post_title }}</div>
             <p class="course-excerpt">{{ courseDetail.post_excerpt }}</p>
           </div>
-          <div class="col-md-4">
+          <div class="col-md-3">
             <p class="course-progress text-center">10 / 11 lessons completed</p>
             <v-card-actions class="justify-center">
               <v-btn round large color="success">Resume</v-btn>
@@ -41,6 +41,8 @@ a:hover {
 }
 .course-thumbnail {
   border-radius: 16px;
+  height: 100%;
+  width: auto;
 }
 .card-course {
   border-radius: 16px;

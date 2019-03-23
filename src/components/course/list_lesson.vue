@@ -31,10 +31,11 @@ export default {
     }
   },
   created() {
-    this.$store.dispatch("fetchLessons")
+    this.$store.dispatch("fetchLessons", this.ID)
   },
   props: {
-    listlesson: Object
+    listlesson: Object,
+    ID: String
   },
   computed: {
     ...mapState(["lessons"]),

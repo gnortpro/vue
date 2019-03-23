@@ -14,7 +14,14 @@
 
         <v-sheet height="500">
           <!-- now is normally calculated by itself, but to keep the calendar in this date range to view events -->
-          <v-calendar ref="calendar" :now="today" :value="today" color="primary" type="week">
+          <v-calendar
+            ref="calendar"
+            :now="today"
+            :value="today"
+            color="primary"
+            type="week"
+            weekdays="[1, 2, 3, 4, 5, 6, 0]"
+          >
             <!-- the events at the top (all-day) -->
             <template v-slot:dayHeadere="{ date }">
               <template v-for="event in eventsMap[date]">

@@ -1,55 +1,45 @@
 <template>
-  <v-app id="insprie">
-    <v-navigation-drawer
-      color="primary"
-      v-model="drawer"
-      :clipped="$vuetify.breakpoint.lgAndUp"
-      fixed
-      floating
-      app
-    >
-      <v-list dense>
-        <template v-for="item in items">
-          <v-layout v-if="item.heading" :key="item.heading" row align-center>
-            <v-flex xs6>
-              <v-subheader v-if="item.heading">{{ item.heading }}</v-subheader>
-            </v-flex>
-            <v-flex xs6 class="text-xs-center">
-              <a href="#!" class="body-2 black--text">EDIT</a>
-            </v-flex>
-          </v-layout>
-          <v-list-group
-            v-else-if="item.children"
-            :key="item.text"
-            v-model="item.model"
-            :prepend-icon="item.model ? item.icon : item['icon-alt']"
-            append-icon
-          >
-            <template v-slot:activator>
-              <v-list-tile>
-                <v-list-tile-content>
-                  <v-list-tile-title>{{ item.text }}</v-list-tile-title>
-                </v-list-tile-content>
-              </v-list-tile>
-            </template>
-            <v-list-tile v-for="(child, i) in item.children" :key="i" @click>
-              <v-list-tile-action v-if="child.icon">
-                <v-icon>{{ child.icon }}</v-icon>
+  <div>
+    <v-navigation-drawer v-model="drawer" :clipped="$vuetify.breakpoint.lgAndUp" fixed floating app>
+      <v-list>
+        <v-list-tile :to="{ path: '/'}" replace>
+          <v-list-tile-action>
+            <v-icon>home</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title style="font-size: 18px;">Home</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+
+        <v-list-tile :to="{ path: '/lesson/1'}" replace>
+          <v-list-tile-action>
+            <v-icon>home</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title style="font-size: 18px;">Lesson</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+
+        <v-list-group>
+          <template v-slot:activator>
+            <v-list-tile>
+              <v-list-tile-action>
+                <v-icon>home</v-icon>
               </v-list-tile-action>
               <v-list-tile-content>
-                <v-list-tile-title>{{ child.text }}</v-list-tile-title>
+                <v-list-tile-title style="font-size: 18px;">Native 1 to 1</v-list-tile-title>
               </v-list-tile-content>
             </v-list-tile>
-          </v-list-group>
-          <v-list-tile v-else :key="item.text" @click>
+          </template>
+          <v-list-tile :to="{ path: '/room'}" replace>
             <v-list-tile-action>
-              <v-icon>{{ item.icon }}</v-icon>
+              <v-icon>home</v-icon>
             </v-list-tile-action>
             <v-list-tile-content>
-              <v-list-tile-title>{{ item.text }}</v-list-tile-title>
+              <v-list-tile-title>Native Schedules</v-list-tile-title>
             </v-list-tile-content>
           </v-list-tile>
-        </template>
+        </v-list-group>
       </v-list>
     </v-navigation-drawer>
     <v-toolbar :clipped-left="$vuetify.breakpoint.lgAndUp" color="blue darken-3" dark app fixed>
@@ -78,15 +68,7 @@
         </v-avatar>
       </v-btn>
     </v-toolbar>
-    <v-content>
-      <v-container fluid fill-height>
-        <router-view></router-view>
-      </v-container>
-    </v-content>
-    <v-footer color="indigo" app>
-      <span class="white--text">&copy; Its your app</span>
-    </v-footer>
-  </v-app>
+  </div>
 </template>
 
 <script>
@@ -95,31 +77,22 @@ export default {
     dialog: false,
     drawer: null,
     items: [
-      { icon: "home", text: "Home" },
-      { icon: "school", text: "Elite Zone" },
+      { icon: "home", text: "Home", link: "home" },
       { icon: "people", text: "Coach Zone" },
       {
         icon: "keyboard_arrow_up",
         "icon-alt": "keyboard_arrow_down",
         text: "Native 1 to 1",
         model: false,
-        children: [{ text: "Native Zone", icon: "history" }]
+        children: [{ text: "Native Zone", icon: "history", link: "room" }]
       },
-      { icon: "book", text: "Courses" },
       { icon: "help", text: "Quizzes" },
       { icon: "photo", text: "FlashCards" },
       { icon: "settings", text: "Support" }
     ]
-  }),
-  props: {
-    source: String
-  }
+  })
 }
 </script>
+
 <style>
-.footer {
-  position: fixed;
-  bottom: 0;
-  padding-left: 20px;
-}
 </style>

@@ -1,7 +1,7 @@
 import axios from "axios"
 
 const apiClient = axios.create({
-  baseURL: `http://localhost:3000`,
+  baseURL: `https://blog.trongggg.com/wp-json/topics`,
   withCredentials: false, // This is the default
   headers: {
     Accept: "application/json",
@@ -10,10 +10,10 @@ const apiClient = axios.create({
 })
 
 export default {
-  getTopic() {
-    return apiClient.get("/topics")
+  getTopicByLessonId(id) {
+    return apiClient.get("/list_topic/" + id)
   },
   getTopicDetails(id) {
-    return apiClient.get("/topics/" + id)
+    return apiClient.get("/topic_detail/" + id)
   }
 }

@@ -3,7 +3,7 @@ import Vuex from "vuex"
 import axios from "axios"
 import VueAxios from "vue-axios"
 import CourseService from "@/services/CourseService.js"
-import LoginService from "@/services/LoginService.js"
+//import LoginService from "@/services/LoginService.js"
 import UserService from "@/services/UserService"
 import LessonService from "@/services/LessonService"
 import TopicService from "@/services/TopicService"
@@ -15,33 +15,36 @@ export default new Vuex.Store({
     course: [],
     courseDetails: {},
     layout: "app-layout",
-    hasToken: 0,
-    user: [],
-    userDetail: [],
-    token: {},
     lessons: [],
     lessonDetail: [],
     topics: [],
-    topicDetail: []
+    topicDetail: [],
+    accessToken: null,
+    loggingIn: false,
+    loginError: null
   },
   mutations: {
     SET_COURSE: (state, course) => (state.course = course),
     SET_COURSE_DETAIL: (state, payload) => (state.courseDetails = payload),
     SET_LAYOUT: (state, payload) => (state.layout = payload),
-    CHECK_TOKEN: (state, hasToken) => (state.hasToken = hasToken),
-    SET_USER: (state, payload) => (state.user = payload),
-    SET_USER_DETAIL: (state, payload) => (state.userDetail = payload),
-    SET_LOGIN: (state, token) => (state.token = token),
     SET_LESSONS: (state, payload) => (state.lessons = payload),
     SET_LESSON_DETAIL: (state, payload) => (state.lessonDetail = payload),
     SET_TOPICS: (state, payload) => (state.topics = payload),
-    SET_TOPIC_DETAIL: (state, payload) => (state.topicDetail = payload)
+    SET_TOPIC_DETAIL: (state, payload) => (state.topicDetail = payload),
+    loginStart: state => (state.loggingIn = true),
+    loginStop: (state, errorMessage) => {
+      state.loggingIn = false
+      state.loginError = errorMessage
+    },
+    updateAccessToken: (state, accessToken) => {
+      state.accessToken = accessToken
+    }
   },
   actions: {
     fetchCource({ commit }) {
       CourseService.getCource()
         .then(response => {
-          commit("SET_COURSE", response.data.courses)
+          commit("SET_COURSE", response.data)
         })
         .catch(error => {
           console.log("There was an error:", error.response)
@@ -61,78 +64,64 @@ export default new Vuex.Store({
           })
       }
     },
-    fetchLessons({ commit }) {
-      LessonService.getListLessonOfCourse()
+    fetchLessons({ commit }, id) {
+      LessonService.getListLessonOfCourse(id)
         .then(response => {
-          commit("SET_LESSONS", response.data.lessons)
+          commit("SET_LESSONS", response.data)
         })
         .catch(error => {
           console.log(error.response)
         })
     },
-    fetchLessonDetail({ commit }) {
-      LessonService.getLessonDetail()
+    fetchLessonDetail({ commit }, id) {
+      LessonService.getLessonDetail(id)
         .then(response => {
-          commit("SET_LESSON_DETAIL", response.data.lesson1)
-        })
-        .catch(error => {
-          console.log(error.response)
-        })
-    },
-
-    fetchTopics({ commit }) {
-      TopicService.getTopic()
-        .then(response => {
-          commit("SET_TOPICS", response.data.topic)
-        })
-        .catch(error => {
-          console.log(error.response)
-        })
-    },
-    getTopicDetails({ commit }) {
-      TopicService.getLessonDetail()
-        .then(response => {
-          commit("SET_TOPIC_DETAIL", response.data.topic)
+          commit("SET_LESSON_DETAIL", response.data)
         })
         .catch(error => {
           console.log(error.response)
         })
     },
 
-    checkToken({ commit }) {
-      LoginService.checkLogin()
+    fetchTopics({ commit }, id) {
+      TopicService.getTopicByLessonId(id)
         .then(response => {
-          commit("CHECK_TOKEN", response.data.page)
+          commit("SET_TOPICS", response.data)
         })
         .catch(error => {
           console.log(error.response)
         })
     },
-    fetchUser({ commit }) {
-      UserService.getUserList()
+    getTopicDetails({ commit }, id) {
+      TopicService.getLessonDetail(id)
         .then(response => {
-          commit("SET_USER", response.data.data)
+          commit("SET_TOPIC_DETAIL", response.data)
         })
         .catch(error => {
           console.log(error.response)
         })
     },
-    fetchUserDetail({ commit }, id) {
-      UserService.getUserDetail(id)
+    fetchLogin({ commit }, user) {
+      commit("loginStart")
+      UserService.postLogin(user)
         .then(response => {
-          commit("SET_USER_DETAIL", response.data)
+          localStorage.setItem("accessToken", response.data.token)
+          commit("loginStop", null)
+          commit("updateAccessToken", response.data.token)
         })
         .catch(error => {
-          console.log(error.response)
+          commit("loginStop", error.response.data.error)
+          commit("updateAccessToken", null)
         })
+    },
+    fetchAccessToken({ commit }) {
+      commit("updateAccessToken", localStorage.getItem("accessToken"))
+      commit("SET_LAYOUT", "app-layout")
     }
   },
   getters: {
     layout(state) {
       return state.layout
-    },
-    checkLogin(state) {
-      return state.hasToken
     },
     getCourseById: state => id => {
       return state.course.find(courseDetails => courseDetails.ID === id)

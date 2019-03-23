@@ -3,7 +3,15 @@
 </template>
 
 <script>
-export default {}
+import { mapActions, mapState } from "vuex"
+export default {
+  methods: {
+    ...mapActions(["fetchAccessToken"])
+  },
+  created() {
+    this.fetchAccessToken()
+  }
+}
 </script>
 
 <style>

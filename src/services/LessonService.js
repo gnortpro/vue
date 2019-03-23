@@ -1,7 +1,7 @@
 import axios from "axios"
 
 const apiClient = axios.create({
-  baseURL: `http://localhost:3000`,
+  baseURL: `https://blog.trongggg.com/wp-json/lesson`,
   withCredentials: false, // This is the default
   headers: {
     Accept: "application/json",
@@ -16,14 +16,14 @@ export default {
   //   }
 
   getListLessonOfCourse() {
-    return apiClient.get("/lessons")
+    return apiClient.get("/list_lesson")
   },
   // chưa có data để get lesson detail by id
-  // getLessonDetail(id){
-  //   return apiClient.get("/lesson/" + id)
-  // },
-
-  getLessonDetail() {
-    return apiClient.get("/lessonDetail")
+  getLessonDetail(id) {
+    return apiClient.get("/list_lesson/" + id)
   }
+
+  // getLessonDetail() {
+  //   return apiClient.get("/lessonDetail")
+  // }
 }

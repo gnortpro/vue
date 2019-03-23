@@ -1,7 +1,7 @@
 import Vue from "vue"
 import Router from "vue-router"
 import Logout from "@/components/logout"
-import Login from "@/components/login/form.vue"
+//import Login from "@/components/login/form.vue"
 
 Vue.use(Router)
 
@@ -9,7 +9,7 @@ export default new Router({
   mode: "history",
   routes: [
     {
-      path: "/course",
+      path: "/",
       name: "course",
       // route level code-splitting
       // this generates a separate chunk (about.[hash].js) for this route
@@ -32,14 +32,15 @@ export default new Router({
     },
 
     {
-      path: "/lesson",
+      path: "/lesson/:ID",
       name: "lesson",
       // route level code-splitting
       // this generates a separate chunk (about.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
       component: function() {
         return import(/* webpackChunkName: "about" */ "../views/lesson/single.vue")
-      }
+      },
+      props: true
     },
 
     {
@@ -54,12 +55,14 @@ export default new Router({
     },
 
     {
-      path: "/",
+      path: "/login",
       name: "login",
       // route level code-splitting
       // this generates a separate chunk (about.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: Login
+      component: function() {
+        return import(/* webpackChunkName: "about" */ "../layouts/LoginLayout.vue")
+      }
     },
 
     {

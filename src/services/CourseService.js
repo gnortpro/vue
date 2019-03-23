@@ -1,7 +1,7 @@
 import axios from "axios"
 
 const apiClient = axios.create({
-  baseURL: `http://localhost:3000`,
+  baseURL: `https://blog.trongggg.com/wp-json/courses`,
   withCredentials: false, // This is the default
   headers: {
     Accept: "application/json",
@@ -11,9 +11,9 @@ const apiClient = axios.create({
 
 export default {
   getCource() {
-    return apiClient.get("/courses")
+    return apiClient.get("/list_course")
   },
   getCourceDetails(id) {
-    return apiClient.get("/courses/" + id)
+    return apiClient.get("/list_course/" + id)
   }
 }

@@ -37,11 +37,17 @@ export default {
     TopicExpansion: () => import("@/components/course/list_topic.vue")
   },
   created() {
-    this.$store.dispatch("fetchLessonDetail")
+    this.$store.dispatch("fetchLessonDetail", this.ID)
   },
   computed: {
     ...mapState(["lessons"]),
     ...mapState(["lessonDetail"])
+  },
+  props: {
+    ID: {
+      type: String,
+      required: true
+    }
   }
 }
 </script>
