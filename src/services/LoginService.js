@@ -1,7 +1,7 @@
 import axios from "axios"
 
 const apiClient = axios.create({
-  baseURL: `https://reqres.in/api`,
+  baseURL: `https://api.learn.x3english.com/api`,
   withCredentials: false, // This is the default
   headers: {
     Accept: "application/json",
@@ -11,6 +11,6 @@ const apiClient = axios.create({
 
 export default {
   checkLogin() {
-    return apiClient.get("/unknown")
+    return apiClient.get("/login")
   }
 }
